@@ -18,21 +18,36 @@ from models import SMLOppo, SMLFlex
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--config", type=str, default="./config.yaml")
-parser.add_argument("--model", choices=["OPPO", "FLEX"], required=True)
-parser.add_argument("--dataset", choices=["VSO", "Yelp"], required=True)
-parser.add_argument("--testset", type=str, required=True)
-parser.add_argument("--num_eval_samples", type=int, default=1000)
-parser.add_argument("--num_epochs", type=int, default=10)
-parser.add_argument("--batch_size", type=int, default=256)
-parser.add_argument("--learning_rate", type=float, default=0.001)
-parser.add_argument("--shuffle_buffer", type=int, default=100000)
-parser.add_argument("--tau", type=float, default=1.0)
-parser.add_argument("--latent_dim", type=int, default=300)
-parser.add_argument("--act_fn", type=str, default="tanh")
-parser.add_argument("--lambda_reg", type=float, default=0.0001)
-parser.add_argument("--seed", type=int, default=2020)
-parser.add_argument("--verbose", action="store_true", default=True)
+parser.add_argument("--config", type=str, default="./config.yaml", 
+                    help="Path to the data config file")
+parser.add_argument("--model", choices=["OPPO", "FLEX"], required=True, 
+                    help="Model name")
+parser.add_argument("--dataset", choices=["VSO", "Yelp"], required=True, 
+                    help="Dataset name")
+parser.add_argument("--testset", type=str, required=True, 
+                    help="Subset of the dataset used for evaluation")
+parser.add_argument("--num_eval_samples", type=int, default=1000,
+                    help="Number of samples for evaluation (default: 1000)")
+parser.add_argument("--num_epochs", type=int, default=5, 
+                    help="Number of training epochs (default: 5)")
+parser.add_argument("--batch_size", type=int, default=256, 
+                    help="Training batch size (default: 256)")
+parser.add_argument("--learning_rate", type=float, default=0.001, 
+                    help="Learning rate (default: 1e-3)")
+parser.add_argument("--shuffle_buffer", type=int, default=100000, 
+                    help="Shuffle buffer the training dataset (default: 1e5)")
+parser.add_argument("--tau", type=float, default=1.0,
+                    help="Margin hyper-parameter of the model (default: 1.0)")
+parser.add_argument("--latent_dim", type=int, default=300, 
+                    help="Number of dimensions of the metric space (default: 300)")
+parser.add_argument("--act_fn", type=str, default="tanh", 
+                    help="Non-linear activation function (default: 'tanh')")
+parser.add_argument("--lambda_reg", type=float, default=0.0001,
+                    help="Lambda value for the l2 regularization (default: 1e-4)")
+parser.add_argument("--seed", type=int, default=2020, 
+                    help="Random seed (default: 2020)")
+parser.add_argument("--verbose", action="store_true", default=True, 
+                    help="Verbose flag (default: True)")
 
 
 def set_seeds(seed=None):
