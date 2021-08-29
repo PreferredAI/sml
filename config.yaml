@@ -1,0 +1,7 @@
+VSO:
+  TXT_LEN: 1
+  IMG_DIM: 2048
+  
+Yelp:
+  TXT_LEN: 30
+  IMG_DIM: 2048
